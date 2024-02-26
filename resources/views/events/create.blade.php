@@ -6,14 +6,20 @@
             {{ __('Create Events') }}
         </h2>
     </x-slot>
-    <form method="post" action="{{ route('events.store') }}">
+    <form method="post" action="{{ route('events.store') }}" enctype="multipart/form-data">
         @csrf
+
+        <label for="image">Event Image:</label>
+        <input type="file" id="image" name="image">
 
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
 
         <label for="description">Description:</label>
         <textarea id="description" name="description" required></textarea>
+
 
         <label for="start_datetime">Start Date and Time:</label>
         <input type="datetime-local" id="start_datetime" name="start_datetime" required>
