@@ -41,6 +41,7 @@ class EventController extends Controller
             'max_attendees' => 'required|integer|min:1',
             // adding image display 
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'location' => 'nullable|string|max:255',
         ]);
 
         $eventData = $request->except('image');
@@ -76,6 +77,7 @@ class EventController extends Controller
             'regular_ticket_price' => 'required|numeric',
             'max_attendees' => 'required|integer|min:1',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+            'location' => 'nullable|string|max:255',
         ]);
         $eventData = $request->except('image');
 
