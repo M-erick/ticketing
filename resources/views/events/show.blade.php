@@ -32,7 +32,7 @@
         <!-- Image Card -->
         <div style="overflow: hidden; border-radius: 10px; padding: 10px;">
             <img src="{{ asset('storage/' . $event->image_path) }}" alt="Event Image"
-                style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px ">
+                style="width: 100%; height: 75%; object-fit: cover; border-radius: 10px; padding:10px; ">
         </div>
         <div
             style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div>
@@ -41,43 +41,47 @@
         <!-- Event Details Card -->
         <div style="padding: 20px; background-color: white;">
             <h2 style="font-size: 2rem; margin-bottom: 10px;">{{ $event->title }}</h2>
-            <p style="font-size: 1.25rem; color: #333; margin-bottom: 20px;">{{ $event->location }}</p>
+            <p style="font-size: 1.25rem; color: #333; margin-bottom: 20px; font-weight:bold">{{ $event->location }}</p>
             <p style="font-size: 1.25rem; color: #333; margin-bottom: 20px;">{{ $event->description }}</p>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <p style="font-size: 1rem; color: #666;">Max Attendees: {{ $event->max_attendees }}</p>
+
+            <div style=" margin-bottom: 10px;">
                 <p style="font-size: 1rem; color: #666;">Starts: {{ $event->start_datetime }}</p>
                 <p style="font-size: 1rem; color: #666;">Ends: {{ $event->end_datetime }}</p>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                <p style="font-size: 1rem; color: #666;">VIP Ticket Price: {{ $event->vip_ticket_price }}</p>
-                <p style="font-size: 1rem; color: #666;">Regular Ticket Price: {{ $event->regular_ticket_price }}</p>
-            </div>
-            <p style="font-size: 1rem; color: #666;">Max Attendees: {{ $event->max_attendees }}</p>
+            
+        </div>
+
+        <div
+            style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div>
 
             <!-- Buy Ticket Section -->
             <section id="buy-tickets" class="section-with-bg">
                 <div class="container" data-aos="fade-up">
                     <div class="section-header">
                         <h2>Buy Tickets</h2>
-                        <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p>
+                        <p>Ticket Pricing .</p>
                     </div>
                     <div class="row">
                         <!-- Standard Access Ticket -->
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                             <div class="card mb-5 mb-lg-0">
                                 <div class="card-body">
-                                    <h5 class="card-title text-muted text-uppercase text-center">Standard Access</h5>
-                                    <h6 class="card-price text-center">$150</h6>
+                                    <h5 class="card-title  text-uppercase text-center"  style="font-weight:">Regular</h5>
+                                    <h6 class="card-price text-center">${{ $event->regular_ticket_price }}</h6>
                                     <hr>
                                     <ul class="fa-ul">
                                         <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
+                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Basic Amenities</li>
+                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Standard Access</li>
                                         <li class="text-muted"><span class="fa-li"><i
                                                     class="fa fa-times"></i></span>Community Access</li>
                                         <li class="text-muted"><span class="fa-li"><i
-                                                    class="fa fa-times"></i></span>Workshop Access</li>
+                                                    class="fa fa-times"></i></span>Custom Badge</li>
                                         <li class="text-muted"><span class="fa-li"><i
                                                     class="fa fa-times"></i></span>After Party</li>
+                                                    <li class="text-muted"><span class="fa-li"><i
+                                                        class="fa fa-times"></i></span>Additional access</li>
                                     </ul>
                                     <hr>
                                     <div class="text-center">
@@ -89,46 +93,21 @@
                             </div>
                         </div>
 
-                        <!-- Pro Access Ticket -->
-                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                            <div class="card mb-5 mb-lg-0">
-                                <div class="card-body">
-                                    <h5 class="card-title text-muted text-uppercase text-center">Pro Access</h5>
-                                    <h6 class="card-price text-center">$250</h6>
-                                    <hr>
-                                    <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                        <li class="text-muted"><span class="fa-li"><i
-                                                    class="fa fa-times"></i></span>Workshop Access</li>
-                                        <li class="text-muted"><span class="fa-li"><i
-                                                    class="fa fa-times"></i></span>After Party</li>
-                                    </ul>
-                                    <hr>
-                                    <div class="text-center">
-                                        <button type="button" class="btn" data-bs-toggle="modal"
-                                            data-bs-target="#buy-ticket-modal" data-ticket-type="pro-access">Buy
-                                            Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Premium Access Ticket -->
                         <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title text-muted text-uppercase text-center">Premium Access</h5>
-                                    <h6 class="card-price text-center">$350</h6>
+                                    <h5 class="card-title  text-uppercase text-center " style="font-weight: bold">VIP</h5>
+                                    <h6 class="card-price text-center">${{ $event->vip_ticket_price }}</h6>
                                     <hr>
                                     <ul class="fa-ul">
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
+                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>VIP Seating</li>
+                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Enhanced Amenities</li>
                                         <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
                                         <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Workshop Access</li>
+                                        <li><span class="fa-li"><i class="fa fa-check"></i></span>Additional Access</li>
                                         <li><span class="fa-li"><i class="fa fa-check"></i></span>After Party</li>
                                     </ul>
                                     <hr>
@@ -165,9 +144,8 @@
                                     <div class="form-group mt-3">
                                         <select id="ticket-type" name="ticket-type" class="form-select">
                                             <option value="">-- Select Your Ticket Type --</option>
-                                            <option value="standard-access">Standard Access</option>
-                                            <option value="pro-access">Pro Access</option>
-                                            <option value="premium-access">Premium Access</option>
+                                            <option value="standard-access">Regular</option>
+                                            <option value="pro-access">VIP</option>
                                         </select>
                                     </div>
                                     <div class="text-center mt-3">
@@ -185,7 +163,6 @@
             <a href="{{ route('events.edit', $event->id) }}"
                 style="font-size: 1rem; color: #3498db; text-decoration: none;">Edit Event</a>
             @endauth
-        </div>
     </div>
 
     <!-- Vendor JS Files -->
