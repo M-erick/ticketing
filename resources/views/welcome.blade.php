@@ -114,72 +114,33 @@
         </section><!-- End About Section -->
 
         <!-- ======= Speakers Section ======= -->
-        <section id="speakers">
-            <div class="container" data-aos="fade-up">
+        <section id="events">
+            <div class="container" style="margin-top: 10px" data-aos="fade-up">
                 <div class="section-header">
-                    <h2>Event Speakers</h2>
-                    <p>Here are some of our speakers</p>
+                    <h2>Events</h2>
+                    <!-- You can modify the heading as needed -->
+                    <p>Explore our upcoming events</p>
                 </div>
-
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="col">
-                        <div class="card" data-aos="fade-up" data-aos-delay="100">
-                            <img src="{{ asset('assets/img/speakers/1.jpg') }}" alt="Speaker 1"
-                                class="card-img-top img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="speaker-details.html">Brenden Legros</a></h3>
-                                <p class="card-text">Quas alias incidunt</p>
-                                <div class="social">
-                                    <!-- Add your social icons here -->
+                    @foreach ($events_display as $event)
+                        <div class="col">
+                            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                                <img src="{{ asset('storage/' . $event->image_path ) }}" alt="{{ $event->title }}"
+                                    class="card-img-top img-fluid" style="height: 150px">
+                                <div class="card-body">
+                                    <h3 class="card-title"><a href="event-details.html">{{ $event->title }}</a></h3>
+                                    <p class="card-text">{{ $event->description }}</p>
+                                    <a href="{{ route('events.show', $event->id) }}" style="font-size: 1rem; color: #3498db; text-decoration: none;">Read More</a>
+
+                                    <!-- Add more details as needed -->
+        
+                                    <div class="social">
+                                        <!-- Add your social icons here -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" data-aos="fade-up" data-aos-delay="200">
-                            <img src="{{ asset('assets/img/speakers/2.jpg') }}" alt="Speaker 2"
-                                class="card-img-top img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                                <p class="card-text">Consequuntur odio aut</p>
-                                <div class="social">
-                                    <!-- Add your social icons here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" data-aos="fade-up" data-aos-delay="100">
-                            <img src="{{ asset('assets/img/speakers/1.jpg') }}" alt="Speaker 1"
-                                class="card-img-top img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="speaker-details.html">Brenden Legros</a></h3>
-                                <p class="card-text">Quas alias incidunt</p>
-                                <div class="social">
-                                    <!-- Add your social icons here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="card" data-aos="fade-up" data-aos-delay="100">
-                            <img src="{{ asset('assets/img/speakers/1.jpg') }}" alt="Speaker 1"
-                                class="card-img-top img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="speaker-details.html">Brenden Legros</a></h3>
-                                <p class="card-text">Quas alias incidunt</p>
-                                <div class="social">
-                                    <!-- Add your social icons here -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Repeat the above 'div' for each speaker -->
-
+                    @endforeach
                 </div>
             </div>
         </section>
