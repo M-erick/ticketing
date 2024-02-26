@@ -53,15 +53,11 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li><a class="nav-link scrollto" href="#speakers">Events</a></li>
-                    <li><a class="nav-link scrollto" href="#venue">Venue</a></li>
-                    <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
 
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     @if (Route::has('login'))
                         @auth
-                            <li><a class="nav-link " href="{{ url('/dashboard') }}">Dashboard</a></li>
                             <li><a class="nav-link " href="{{ url('events.index') }}">Events</a></li>
                         @else
                             <li><a class="nav-link " href="{{ url('login') }}">Login</a></li>
@@ -81,10 +77,19 @@
     </header>
     <section id="hero">
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
+
+            @if($latestEvent)
+            <h1 class="mb-4 pb-0">{{ $latestEvent->title }}</span> Conference</h1>
+            <p class="mb-4 pb-0">{{ $latestEvent->formattedDate() }}</p>
+            <a href="#" class="glightbox play-btn mb-4"></a>
+            <a href="#about" class="about-btn scrollto">About The Event</a>
+
+            @else
             <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>
             <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>
             <a href="#" class="glightbox play-btn mb-4"></a>
             <a href="#about" class="about-btn scrollto">About The Event</a>
+            @endif
         </div>
     </section><!-- End Hero Section -->
     <main id="main">
@@ -94,21 +99,20 @@
             <div class="container position-relative" data-aos="fade-up">
                 <div class="row">
                     <div class="col-lg-6">
+
                         <h2>About The Event</h2>
-                        <p>Sed nam ut dolor qui repellendus iusto odit. Possimus inventore eveniet accusamus error amet
-                            eius aut
-                            accusantium et. Non odit consequatur repudiandae sequi ea odio molestiae. Enim possimus sunt
-                            inventore in
-                            est ut optio sequi unde.</p>
+                        @if($latestEvent)
+                        <p>{{ $latestEvent->description }}.</p>
                     </div>
                     <div class="col-lg-3">
                         <h3>Where</h3>
-                        <p>Downtown Conference Center, New York</p>
+                        <p>{{ $latestEvent->location }}</p>
                     </div>
                     <div class="col-lg-3">
                         <h3>When</h3>
-                        <p>Monday to Wednesday<br>10-12 December</p>
+                        <p>{{ $latestEvent->formattedStartDate()}} to  {{ $latestEvent->formattedEndDate() }}</p>
                     </div>
+                    @endif
                 </div>
             </div>
         </section><!-- End About Section -->
