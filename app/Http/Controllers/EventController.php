@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 class EventController extends Controller
 {
+
+    // fetch the events to display in the welcom  page
+    public function welcome(){
+        $events_display = Event::all();
+        return view('welcome',compact('events_display'));
+    } 
     
     public function index(){
         $events = Event::all();
@@ -33,9 +39,20 @@ class EventController extends Controller
             'vip_ticket_price' => 'required|numeric',
             'regular_ticket_price' => 'required|numeric',
             'max_attendees' => 'required|integer|min:1',
+            // adding image display 
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Event::create($request->all());
+        $eventData = $request->except('image');
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('events', 'public');
+            $eventData['image_path'] = $imagePath;
+        }
+
+
+        Event::create($eventData);
 
         return redirect()->route('events.index')->with('success', 'Event created successfully!');
     }
@@ -58,11 +75,18 @@ class EventController extends Controller
             'vip_ticket_price' => 'required|numeric',
             'regular_ticket_price' => 'required|numeric',
             'max_attendees' => 'required|integer|min:1',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
         ]);
+        $eventData = $request->except('image');
 
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('events', 'public');
+            $eventData['image_path'] = $imagePath;
+        }
+    
         $event = Event::findOrFail($id);
-        $event->update($request->all());
-
+        $event->update($eventData);
         return redirect()->route('events.index')->with('success', 'Event updated successfully!');
     }
 
