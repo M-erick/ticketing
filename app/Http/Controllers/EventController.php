@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Carbon\Carbon;
 class EventController extends Controller
 {
 
     // fetch the events to display in the welcom  page
     public function welcome(){
+
         $events_display = Event::all();
-        return view('welcome',compact('events_display'));
+
+        $now =Carbon::now();
+        $latestEvent = Event::where('start_datetime', '>=', $now)->orderBy('start_datetime')->first();
+
+        return view('welcome',compact('events_display','latestEvent'));
     } 
     
     public function index(){
@@ -100,5 +106,8 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
     }
+    // get current event
+
+   
 
 }
