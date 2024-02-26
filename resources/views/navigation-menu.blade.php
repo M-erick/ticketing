@@ -12,7 +12,7 @@
                 </div>
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <x-nav-link href="{{ route('events.index') }}" :active="request()->routeIs('events.index')">
+                    <x-nav-link href="{{ route('welcome') }}" :active="request()->routeIs('events.index')">
                         {{ __('EventPulse') }}
                     </x-nav-link>
                 </div>
