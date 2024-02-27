@@ -221,7 +221,7 @@
             <div class="container" data-aos="zoom-in">
                 <div class="section-header">
                     <h2>Newsletter</h2>
-                    <p>Rerum numquam illum recusandae quia mollitia consequatur.</p>
+                    <p>Subscribe to get updates on current news events.</p>
                 </div>
 
                 <form method="POST" action="#">
@@ -303,7 +303,6 @@
                 </div>
             </div>
 
-            <!-- Modal Order Form -->
             <!-- Modal Order Form -->
             <div id="buy-ticket-modal" class="modal fade">
                 <div class="modal-dialog" role="document">
