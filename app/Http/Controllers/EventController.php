@@ -15,17 +15,22 @@ class EventController extends Controller
 
         $events_display = Event::all();
         
+        // add pagination 
+        $events_paginate =  Event::paginate(5); // 5 items per page
+
 
 
         $now =Carbon::now();
         $latestEvent = Event::where('start_datetime', '>=', $now)->orderBy('start_datetime')->first();
 
-        return view('welcome',compact('events_display','latestEvent'));
+        return view('welcome',compact('events_display','latestEvent','events_paginate'));
     } 
     
     public function index(){
         $events = Event::all();
-        return view('events.index',compact('events'));
+        $events_paginate =  Event::paginate(5); // 5 items per page
+
+        return view('events.index',compact('events','events_paginate'));
     }
 
     public function show($id){
@@ -36,8 +41,14 @@ class EventController extends Controller
         return view('events.show',compact('event','events'));
 
     }
-    public function create()
+    public function create(Request $request)
     {
+         // Check if the user has the 'admin' role
+         if (!$request->user() || !$request->user()->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+        
+
         return view('events.create');
     }
 
@@ -72,8 +83,13 @@ class EventController extends Controller
     }
 
     // Show the form for editing an existing event
-    public function edit($id)
+    public function edit(Request $request ,$id)
     {
+         // Check if the user has the 'admin' role
+         if (!$request->user() || !$request->user()->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $event = Event::findOrFail($id);
         return view('events.edit', compact('event'));
     }
@@ -81,6 +97,11 @@ class EventController extends Controller
     // Update the specified event in the database
     public function update(Request $request, $id)
     {
+         // Check if the user has the 'admin' role
+         if (!$request->user() || !$request->user()->hasRole('admin')) {
+            abort(403, 'Unauthorized action.');
+        }
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',

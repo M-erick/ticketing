@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Event;
 
+use App\Notifications\TicketPurchased;
+
 class ReservationController extends Controller
 {
     public function store(Request $request)
@@ -33,12 +35,15 @@ class ReservationController extends Controller
        
     
     
-        Reservation::create([
+        $reservation = Reservation::create([
             'user_name' => $request->input('user_name'),
             'user_email' => $request->input('user_email'),
             'ticket_type' => $ticketType,
             'event_title' => $request->input('event'),
         ]);
+
+        // Trigger the notification
+    $reservation->notify(new TicketPurchased());
 
             // You can redirect back to the current page with the message
             return redirect()->back()->with('success', 'Booking successful! Ticket Type: ' . $ticketType . ', Event Title: ' . $request->input('event'));

@@ -28,6 +28,27 @@
         <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
         <!-- Styles -->
+
+        <style>
+            .btn-edit-event {
+                display: inline; /* Change from inline-block to inline */
+                padding: 8px 16px; /* Adjust the padding as needed */
+                font-size: 1rem;
+                color: #3498db;
+                text-decoration: none;
+                border: 1px solid #3498db;
+                border-radius: 8px; /* Add border-radius for rounded corners */
+                background-color: #fff;
+                transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+            }
+        
+            .btn-edit-event:hover {
+                background-color: #3498db;
+                color: #fff;
+            }
+        </style>
+        
+        
     </head>
 
     {{-- success message --}}
@@ -68,6 +89,16 @@
             </div>
 
         </div>
+
+        @admin
+       <!-- Your link styled as a button with rounded borders -->
+<a href="{{ route('events.edit', $event->id) }}" class="btn-edit-event">
+    Edit Event
+</a>
+
+
+
+    @endadmin
 
         <div style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div>
 
@@ -188,10 +219,7 @@
         </section><!-- End Buy Ticket Section -->
 
         <!-- Display "Edit Event" link for logged-in users -->
-        @auth
-            <a href="{{ route('events.edit', $event->id) }}"
-                style="font-size: 1rem; color: #3498db; text-decoration: none;">Edit Event</a>
-        @endauth
+       
     </div>
 
     <!-- Vendor JS Files -->

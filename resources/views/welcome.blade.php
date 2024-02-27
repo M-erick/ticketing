@@ -34,13 +34,45 @@
 
     <!-- Styles -->
 
+    <style>
+        /* CSS for Pagination Links */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 0;
+            margin: 20px 0; /* Adjust margin as needed */
+        }
+    
+        .pagination li {
+            margin: 0 5px;
+        }
+    
+        .pagination a,
+        .pagination span {
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #3498db;
+            border: 1px solid #3498db;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .pagination a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+
 </head>
 
 <body class="antialiased">
     <header id="header" class="d-flex align-items-center">
         <div class="container-fluid container-xxl d-flex align-items-center">
             <div id="logo" class="me-auto" style="display: flex; align-items: center;">
-                <a href="index.html" class="scrollto">
+                <a href="{{ route('events.index') }}" class="scrollto">
                     <img src="{{ asset('assets/img/eveNT.png') }}" style="object-fit: cover; height: 50px;"
                         alt="" title="">
                 </a>
@@ -57,7 +89,7 @@
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     @if (Route::has('login'))
                         @auth
-                            <li><a class="nav-link " href="{{ url('events.index') }}">Events</a></li>
+                            <li><a class="nav-link " href="{{ route('events.index') }}">Events</a></li>
                         @else
                             <li><a class="nav-link " href="{{ url('login') }}">Login</a></li>
                             @if (Route::has('register'))
@@ -145,7 +177,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                        @foreach ($events_display as $event)
+                        @foreach ($events_paginate as $event)
                             <div
                                 style="margin-bottom: 20px; display: flex; border-radius: 10px; overflow: hidden; background-color: white;">
                                 <div
@@ -155,7 +187,7 @@
                                 </div>
                                 <div style="width: 50%; padding: 20px; background-color: white; height: 100%;">
                                     <h3 style="font-size: 1.5rem; margin-bottom: 10px;">{{ $event->title }}</h3>
-                                    <p style="font-size: 1rem; color: #666;">{{ $event->description }}</p>
+                                    <p style="font-size: 1rem; color: #666;">{{ substr($event->description, 0, 100) }} ...</p>
                                     <p style="font-size: 1.5rem; margin-bottom: 10px;">{{ $event->location }}</p>
 
                                     <p style="font-size: 0.9rem; color: #999;">Starts: {{ $event->start_datetime }}
@@ -168,6 +200,10 @@
                             <div style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div>
                             <!-- Gray background gap -->
                         @endforeach
+                        <div class="pagination">
+                            {{ $events_paginate->links() }}
+                        </div>
+
                     </div>
                 </div>
         </section>

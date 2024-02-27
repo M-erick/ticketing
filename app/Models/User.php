@@ -58,4 +58,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+    
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
 }
