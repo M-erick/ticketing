@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use Carbon\Carbon;
+use App\Models\Subscriber;
+
 class EventController extends Controller
 {
 
@@ -12,6 +14,8 @@ class EventController extends Controller
     public function welcome(){
 
         $events_display = Event::all();
+        
+
 
         $now =Carbon::now();
         $latestEvent = Event::where('start_datetime', '>=', $now)->orderBy('start_datetime')->first();
@@ -26,7 +30,10 @@ class EventController extends Controller
 
     public function show($id){
         $event = Event::findOrFail($id);
-        return view('events.show',compact('event'));
+        $events = Event::all();
+
+
+        return view('events.show',compact('event','events'));
 
     }
     public function create()
@@ -106,7 +113,18 @@ class EventController extends Controller
 
         return redirect()->route('events.index')->with('success', 'Event deleted successfully!');
     }
-    // get current event
+    // get subscriber  details 
+
+    public function subscribe(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|unique:subscribers,email',
+    ]);
+
+    Subscriber::create(['email' => $request->input('email')]);
+
+    return redirect()->back()->with('success', 'Subscription successful!');
+}
 
    
 
