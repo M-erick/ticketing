@@ -53,7 +53,6 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#speakers">Events</a></li>
 
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                     @if (Route::has('login'))
@@ -76,21 +75,20 @@
         </div>
     </header>
 
-    
+
     <section id="hero">
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
 
-            @if($latestEvent)
-            <h1 class="mb-4 pb-0">{{ $latestEvent->title }}</span> </h1>
-            <p class="mb-4 pb-0">{{ $latestEvent->formattedDate() }}</p>
-            <a href="#" class="glightbox play-btn mb-4"></a>
-            <a href="#about" class="about-btn scrollto">About The Event</a>
-
+            @if ($latestEvent)
+                <h1 class="mb-4 pb-0">{{ $latestEvent->title }}</span> </h1>
+                <p class="mb-4 pb-0">{{ $latestEvent->formattedDate() }}</p>
+                <a href="#" class="glightbox play-btn mb-4"></a>
+                <a href="#about" class="about-btn scrollto">About The Event</a>
             @else
-            <h1 class="mb-4 pb-0">The Annual<br><span>AI</span> Conference</h1>
-            <p class="mb-4 pb-0">10-12 December, KICC Conference Center, Nairboi</p>
-            <a href="#" class="glightbox play-btn mb-4"></a>
-            <a href="#about" class="about-btn scrollto">About The Event</a>
+                <h1 class="mb-4 pb-0">The Annual<br><span>AI</span> Conference</h1>
+                <p class="mb-4 pb-0">10-12 December, KICC Conference Center, Nairboi</p>
+                <a href="#" class="glightbox play-btn mb-4"></a>
+                <a href="#about" class="about-btn scrollto">About The Event</a>
             @endif
         </div>
     </section><!-- End Hero Section -->
@@ -106,8 +104,8 @@
                     <div class="col-lg-6">
 
                         <h2>About The Event</h2>
-                        @if($latestEvent)
-                        <p>{{ $latestEvent->description }}.</p>
+                        @if ($latestEvent)
+                            <p>{{ $latestEvent->description }}.</p>
                     </div>
                     <div class="col-lg-3">
                         <h3>Where</h3>
@@ -115,26 +113,26 @@
                     </div>
                     <div class="col-lg-3">
                         <h3>When</h3>
-                        <p>{{ $latestEvent->formattedStartDate()}} to  {{ $latestEvent->formattedEndDate() }}</p>
+                        <p>{{ $latestEvent->formattedStartDate() }} to {{ $latestEvent->formattedEndDate() }}</p>
                     </div>
                     @endif
                 </div>
             </div>
         </section><!-- End About Section -->
 
-            {{-- success message --}}
- @if(session('success'))
- <div class="alert alert-success" id="success-alert" style="margin: 10px">
-     {{ session('success') }}
+        {{-- success message --}}
+        @if (session('success'))
+            <div class="alert alert-success" id="success-alert" style="margin: 10px">
+                {{ session('success') }}
 
- </div>
- <script>
-     // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
-     setTimeout(function() {
-         document.getElementById('success-alert').style.display = 'none';
-     }, 5000);
- </script>
-@endif
+            </div>
+            <script>
+                // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    document.getElementById('success-alert').style.display = 'none';
+                }, 5000);
+            </script>
+        @endif
 
         <!-- ======= Events Section ======= -->
         <section id="events">
@@ -145,28 +143,33 @@
                     <p>Explore our upcoming events</p>
                 </div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div  class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
- 
-                    @foreach ($events_display as $event)
-                    <div style="margin-bottom: 20px; display: flex; border-radius: 10px; overflow: hidden; background-color: white;">
-                        <div style="flex-shrink: 0; width:55%; overflow: hidden; border-radius: 10px 0 0 10px; margin-right: 10px;">
-                            <img src="{{ asset('storage/' . $event->image_path) }}" alt="Event Image" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="width: 50%; padding: 20px; background-color: white; height: 100%;">
-                            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">{{ $event->title }}</h3>
-                            <p style="font-size: 1rem; color: #666;">{{ $event->description }}</p>
-                            <p style="font-size: 1.5rem; margin-bottom: 10px;" >{{ $event->location }}</p>
+                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                            <p style="font-size: 0.9rem; color: #999;">Starts: {{ $event->start_datetime }}</p>
-                            <p style="font-size: 0.9rem; color: #999;">Ends: {{ $event->end_datetime }}</p>
-                            <a href="{{ route('events.show', $event->id) }}" style="font-size: 1rem; color: #3498db; text-decoration: none;">Read More</a>
-                        </div>
+                        @foreach ($events_display as $event)
+                            <div
+                                style="margin-bottom: 20px; display: flex; border-radius: 10px; overflow: hidden; background-color: white;">
+                                <div
+                                    style="flex-shrink: 0; width:55%; overflow: hidden; border-radius: 10px 0 0 10px; margin-right: 10px;">
+                                    <img src="{{ asset('storage/' . $event->image_path) }}" alt="Event Image"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div style="width: 50%; padding: 20px; background-color: white; height: 100%;">
+                                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">{{ $event->title }}</h3>
+                                    <p style="font-size: 1rem; color: #666;">{{ $event->description }}</p>
+                                    <p style="font-size: 1.5rem; margin-bottom: 10px;">{{ $event->location }}</p>
+
+                                    <p style="font-size: 0.9rem; color: #999;">Starts: {{ $event->start_datetime }}
+                                    </p>
+                                    <p style="font-size: 0.9rem; color: #999;">Ends: {{ $event->end_datetime }}</p>
+                                    <a href="{{ route('events.show', $event->id) }}"
+                                        style="font-size: 1rem; color: #3498db; text-decoration: none;">Read More</a>
+                                </div>
+                            </div>
+                            <div style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div>
+                            <!-- Gray background gap -->
+                        @endforeach
                     </div>
-                    <div style="height: 10px; background-color: #f0f0f0; margin-bottom: 20px; "></div> <!-- Gray background gap -->
-
-                    @endforeach
                 </div>
-            </div>
         </section>
         <!-- ======= Gallery Section ======= -->
         <section id="gallery">
@@ -180,30 +183,15 @@
 
             <div class="gallery-slider swiper">
                 <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><a href="assets/img/gallery/1.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/1.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/2.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/2.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/3.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/3.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/4.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/4.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/5.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/5.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/6.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/6.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/7.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/7.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="swiper-slide"><a href="assets/img/gallery/8.jpg" class="gallery-lightbox"><img
-                                src="{{ asset('assets/img/gallery/8.jpg') }}" class="img-fluid" alt=""></a>
-                    </div>
+                    @foreach ($events_display as $event)
+                        <div class="swiper-slide">
+                            <a href="{{ asset('storage/' . $event->image_path) }}" class="gallery-lightbox">
+                                <img src="{{ asset('storage/' . $event->image_path) }}" class="img-fluid"
+                                    alt="">
+                            </a>
+                        </div>
+                    @endforeach
+                    
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -223,19 +211,20 @@
                     <h2>Newsletter</h2>
                     <p>Subscribe to get updates on upcoming events.</p>
                 </div>
-        
+
                 <form method="POST" action="{{ route('subscribe') }}">
                     @csrf
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-10 d-flex">
-                            <input type="text" class="form-control" name="email" placeholder="Enter your Email" required>
+                            <input type="text" class="form-control" name="email" placeholder="Enter your Email"
+                                required>
                             <button type="submit" class="ms-2">Subscribe</button>
                         </div>
                     </div>
                 </form>
             </div>
         </section><!-- End Subscribe Section -->
-        
+
 
         <!-- ======= Buy Ticket Section ======= -->
         <section id="buy-tickets" class="section-with-bg">
@@ -249,7 +238,7 @@
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="card mb-5 mb-lg-0">
                             <div class="card-body">
-                                <h5 class="card-title  text-uppercase text-center"  style="font-weight:">Regular</h5>
+                                <h5 class="card-title  text-uppercase text-center" style="font-weight:">Regular</h5>
                                 <h6 class="card-price text-center">${{ $latestEvent->regular_ticket_price }}</h6>
                                 <hr>
                                 <ul class="fa-ul">
@@ -262,20 +251,20 @@
                                                 class="fa fa-times"></i></span>Custom Badge</li>
                                     <li class="text-muted"><span class="fa-li"><i
                                                 class="fa fa-times"></i></span>After Party</li>
-                                                <li class="text-muted"><span class="fa-li"><i
-                                                    class="fa fa-times"></i></span>Additional access</li>
+                                    <li class="text-muted"><span class="fa-li"><i
+                                                class="fa fa-times"></i></span>Additional access</li>
                                 </ul>
                                 <hr>
                                 <div class="text-center">
                                     <button type="button" class="btn" data-bs-toggle="modal"
-                                        data-bs-target="#buy-ticket-modal"
-                                        data-ticket-type="standard-access">Buy Now</button>
+                                        data-bs-target="#buy-ticket-modal" data-ticket-type="standard-access">Buy
+                                        Now</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    
+
 
                     <!-- Premium Access Ticket -->
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
@@ -317,16 +306,18 @@
                             <form method="POST" action="{{ route('reservations.store') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="your-name" placeholder="Your Name" required>
+                                    <input type="text" class="form-control" name="user_name"
+                                        placeholder="Your Name" required>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="text" class="form-control" name="your-email" placeholder="Your Email" required>
+                                    <input type="text" class="form-control" name="user_email"
+                                        placeholder="Your Email" required>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="event">Select Event:</label>
                                     <select id="event" name="event" class="form-select" required>
                                         <option value="">-- Select Event --</option>
-                                        @foreach($events_display as $events)
+                                        @foreach ($events_display as $events)
                                             <option value="{{ $events->title }}">{{ $events->title }}</option>
                                         @endforeach
                                     </select>
@@ -343,9 +334,9 @@
                                     <button type="submit" class="btn">Buy Now</button>
                                 </div>
                             </form>
-                            
+
                         </div>
-                        
+
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
@@ -367,7 +358,7 @@
                         <div class="contact-address">
                             <i class="bi bi-geo-alt"></i>
                             <h3>Address</h3>
-                            <address>kimathi  Street, NAIROI 60100, KENYA</address>
+                            <address>kimathi Street, NAIROI 60100, KENYA</address>
                         </div>
                     </div>
 
