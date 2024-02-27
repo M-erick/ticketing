@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\ReservationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +19,10 @@ use App\Http\Controllers\EventController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome', [EventController::class, 'welcome']);
+// });
+Route::get('/', [EventController::class, 'welcome'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -52,6 +53,13 @@ Route::put('/events/{id}', [EventController::class, 'update'])->name('events.upd
 
 // Remove the specified event from the database
 Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
+
+// subscriber
+Route::post('/subscribe', [EventController::class, 'subscribe'])->name('subscribe');
+
+//Reservation Routes
+Route::post('/reservations', [ReservationController::class ,'store'])->name('reservations.store');
+
 
 
 require __DIR__.'/auth.php';
