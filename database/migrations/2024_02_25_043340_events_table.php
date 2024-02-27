@@ -20,6 +20,9 @@ return new class extends Migration
             $table->decimal('vip_ticket_price', 8, 2);
             $table->decimal('regular_ticket_price', 8, 2);
             $table->integer('max_attendees');
+
+            // adding image 
+            $table->string('image_path')->nullable(); 
             $table->timestamps();
 
 
