@@ -27,6 +27,21 @@
 
         <!-- Styles -->
     </head>
+
+    {{-- success message --}}
+    @if(session('success'))
+    <div class="alert alert-success" id="success-alert">
+        {{ session('success') }}
+
+    </div>
+    <script>
+        // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
+        setTimeout(function() {
+            document.getElementById('success-alert').style.display = 'none';
+        }, 5000);
+    </script>
+@endif
+
     <div style="display: flex; flex-direction: column; overflow: hidden; background-color: white;">
 
         <!-- Image Card -->
@@ -132,27 +147,38 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form method="POST" action="#">
+                                <form method="POST" action="{{ route('reservations.store') }}">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="your-name"
-                                            placeholder="Your Name">
+                                        <input type="text" class="form-control" name="your-name" placeholder="Your Name" required>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <input type="text" class="form-control" name="your-email"
-                                            placeholder="Your Email">
+                                        <input type="text" class="form-control" name="your-email" placeholder="Your Email" required>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <select id="ticket-type" name="ticket-type" class="form-select">
+                                        <label for="event">Select Event:</label>
+                                        <select id="event" name="event" class="form-select" required>
+                                            <option value="">-- Select Event --</option>
+                                            @foreach($events as $event)
+                                                <option value="{{ $event->title }}">{{ $event->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="ticket-type">Select Ticket Type:</label>
+                                        <select id="ticket-type" name="ticket-type" class="form-select" required>
                                             <option value="">-- Select Your Ticket Type --</option>
-                                            <option value="standard-access">Regular</option>
-                                            <option value="pro-access">VIP</option>
+                                            <option value="regular-access">Regular</option>
+                                            <option value="vip-access">VIP</option>
                                         </select>
                                     </div>
                                     <div class="text-center mt-3">
                                         <button type="submit" class="btn">Buy Now</button>
                                     </div>
                                 </form>
+                                
                             </div>
+                            
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
