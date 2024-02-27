@@ -75,24 +75,29 @@
 
         </div>
     </header>
+
+    
     <section id="hero">
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
 
             @if($latestEvent)
-            <h1 class="mb-4 pb-0">{{ $latestEvent->title }}</span> Conference</h1>
+            <h1 class="mb-4 pb-0">{{ $latestEvent->title }}</span> </h1>
             <p class="mb-4 pb-0">{{ $latestEvent->formattedDate() }}</p>
             <a href="#" class="glightbox play-btn mb-4"></a>
             <a href="#about" class="about-btn scrollto">About The Event</a>
 
             @else
-            <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>
-            <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>
+            <h1 class="mb-4 pb-0">The Annual<br><span>AI</span> Conference</h1>
+            <p class="mb-4 pb-0">10-12 December, KICC Conference Center, Nairboi</p>
             <a href="#" class="glightbox play-btn mb-4"></a>
             <a href="#about" class="about-btn scrollto">About The Event</a>
             @endif
         </div>
     </section><!-- End Hero Section -->
+
     <main id="main">
+
+
 
         <!-- ======= About Section ======= -->
         <section id="about">
@@ -117,7 +122,21 @@
             </div>
         </section><!-- End About Section -->
 
-        <!-- ======= Speakers Section ======= -->
+            {{-- success message --}}
+ @if(session('success'))
+ <div class="alert alert-success" id="success-alert" style="margin: 10px">
+     {{ session('success') }}
+
+ </div>
+ <script>
+     // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
+     setTimeout(function() {
+         document.getElementById('success-alert').style.display = 'none';
+     }, 5000);
+ </script>
+@endif
+
+        <!-- ======= Events Section ======= -->
         <section id="events">
             <div class="container" style="margin-top: 10px" data-aos="fade-up">
                 <div class="section-header">
@@ -149,47 +168,6 @@
                 </div>
             </div>
         </section>
-
-
-
-        <!-- ======= Venue Section ======= -->
-        <section id="venue">
-
-            <div class="container-fluid" data-aos="fade-up">
-
-                <div class="section-header">
-                    <h2>Event Venue</h2>
-                    <p>Event venue location info and gallery</p>
-                </div>
-
-                <div class="row g-0">
-                    <div class="col-lg-6 venue-map">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
-                            frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
-
-                    <div class="col-lg-6 venue-info">
-                        <div class="row justify-content-center">
-                            <div class="col-11 col-lg-8 position-relative">
-                                <h3>Downtown Conference Center, New York</h3>
-                                <p>Iste nobis eum sapiente sunt enim dolores labore accusantium autem. Cumque beatae
-                                    ipsam. Est quae sit qui voluptatem corporis velit. Qui maxime accusamus possimus.
-                                    Consequatur sequi et ea suscipit enim nesciunt quia velit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-
-        </section><!-- End Venue Section -->
-
-
-
         <!-- ======= Gallery Section ======= -->
         <section id="gallery">
 
@@ -261,77 +239,56 @@
         <!-- ======= Buy Ticket Section ======= -->
         <section id="buy-tickets" class="section-with-bg">
             <div class="container" data-aos="fade-up">
-
                 <div class="section-header">
                     <h2>Buy Tickets</h2>
-                    <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p>
+                    <p>Ticket Pricing .</p>
                 </div>
-
                 <div class="row">
+                    <!-- Standard Access Ticket -->
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="card mb-5 mb-lg-0">
                             <div class="card-body">
-                                <h5 class="card-title text-muted text-uppercase text-center">Standard Access</h5>
-                                <h6 class="card-price text-center">$150</h6>
+                                <h5 class="card-title  text-uppercase text-center"  style="font-weight:">Regular</h5>
+                                <h6 class="card-price text-center">${{ $latestEvent->regular_ticket_price }}</h6>
                                 <hr>
                                 <ul class="fa-ul">
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
+                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Basic Amenities</li>
+                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Standard Access</li>
                                     <li class="text-muted"><span class="fa-li"><i
                                                 class="fa fa-times"></i></span>Community Access</li>
                                     <li class="text-muted"><span class="fa-li"><i
-                                                class="fa fa-times"></i></span>Workshop Access</li>
+                                                class="fa fa-times"></i></span>Custom Badge</li>
                                     <li class="text-muted"><span class="fa-li"><i
                                                 class="fa fa-times"></i></span>After Party</li>
+                                                <li class="text-muted"><span class="fa-li"><i
+                                                    class="fa fa-times"></i></span>Additional access</li>
                                 </ul>
                                 <hr>
                                 <div class="text-center">
                                     <button type="button" class="btn" data-bs-toggle="modal"
-                                        data-bs-target="#buy-ticket-modal" data-ticket-type="standard-access">Buy
-                                        Now</button>
+                                        data-bs-target="#buy-ticket-modal"
+                                        data-ticket-type="standard-access">Buy Now</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card mb-5 mb-lg-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-muted text-uppercase text-center">Pro Access</h5>
-                                <h6 class="card-price text-center">$250</h6>
-                                <hr>
-                                <ul class="fa-ul">
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                    <li class="text-muted"><span class="fa-li"><i
-                                                class="fa fa-times"></i></span>Workshop Access</li>
-                                    <li class="text-muted"><span class="fa-li"><i
-                                                class="fa fa-times"></i></span>After Party</li>
-                                </ul>
-                                <hr>
-                                <div class="text-center">
-                                    <button type="button" class="btn" data-bs-toggle="modal"
-                                        data-bs-target="#buy-ticket-modal" data-ticket-type="pro-access">Buy
-                                        Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Pro Tier -->
+
+                    
+
+                    <!-- Premium Access Ticket -->
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-muted text-uppercase text-center">Premium Access</h5>
-                                <h6 class="card-price text-center">$350</h6>
+                                <h5 class="card-title  text-uppercase text-center " style="font-weight: bold">VIP</h5>
+                                <h6 class="card-price text-center">${{ $latestEvent->vip_ticket_price }}</h6>
                                 <hr>
                                 <ul class="fa-ul">
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
+                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>VIP Seating</li>
+                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Enhanced Amenities</li>
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Workshop Access</li>
+                                    <li><span class="fa-li"><i class="fa fa-check"></i></span>Additional Access</li>
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>After Party</li>
                                 </ul>
                                 <hr>
@@ -340,14 +297,13 @@
                                         data-bs-target="#buy-ticket-modal" data-ticket-type="premium-access">Buy
                                         Now</button>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
+            <!-- Modal Order Form -->
             <!-- Modal Order Form -->
             <div id="buy-ticket-modal" class="modal fade">
                 <div class="modal-dialog" role="document">
@@ -358,32 +314,41 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="#">
+                            <form method="POST" action="{{ route('reservations.store') }}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="your-name"
-                                        placeholder="Your Name">
+                                    <input type="text" class="form-control" name="your-name" placeholder="Your Name" required>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <input type="text" class="form-control" name="your-email"
-                                        placeholder="Your Email">
+                                    <input type="text" class="form-control" name="your-email" placeholder="Your Email" required>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <select id="ticket-type" name="ticket-type" class="form-select">
+                                    <label for="event">Select Event:</label>
+                                    <select id="event" name="event" class="form-select" required>
+                                        <option value="">-- Select Event --</option>
+                                        @foreach($events_display as $events)
+                                            <option value="{{ $events->title }}">{{ $events->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="ticket-type">Select Ticket Type:</label>
+                                    <select id="ticket-type" name="ticket-type" class="form-select" required>
                                         <option value="">-- Select Your Ticket Type --</option>
-                                        <option value="standard-access">Standard Access</option>
-                                        <option value="pro-access">Pro Access</option>
-                                        <option value="premium-access">Premium Access</option>
+                                        <option value="regular-access">Regular</option>
+                                        <option value="vip-access">VIP</option>
                                     </select>
                                 </div>
                                 <div class="text-center mt-3">
                                     <button type="submit" class="btn">Buy Now</button>
                                 </div>
                             </form>
+                            
                         </div>
+                        
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
-
         </section><!-- End Buy Ticket Section -->
 
         <!-- ======= Contact Section ======= -->
@@ -393,7 +358,7 @@
 
                 <div class="section-header">
                     <h2>Contact Us</h2>
-                    <p>Nihil officia ut sint molestiae tenetur.</p>
+                    <p>Contact details.</p>
                 </div>
 
                 <div class="row contact-info">
@@ -402,7 +367,7 @@
                         <div class="contact-address">
                             <i class="bi bi-geo-alt"></i>
                             <h3>Address</h3>
-                            <address>A108 Adam Street, NY 535022, USA</address>
+                            <address>kimathi  Street, NAIROI 60100, KENYA</address>
                         </div>
                     </div>
 
@@ -410,7 +375,7 @@
                         <div class="contact-phone">
                             <i class="bi bi-phone"></i>
                             <h3>Phone Number</h3>
-                            <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+                            <p><a href="tel:+254713649428">+254713649428</a></p>
                         </div>
                     </div>
 
@@ -418,7 +383,7 @@
                         <div class="contact-email">
                             <i class="bi bi-envelope"></i>
                             <h3>Email</h3>
-                            <p><a href="mailto:info@example.com">info@example.com</a></p>
+                            <p><a href="mailto:info@example.com">muriithierick3758@gmail.com</a></p>
                         </div>
                     </div>
 
