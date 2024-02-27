@@ -221,20 +221,21 @@
             <div class="container" data-aos="zoom-in">
                 <div class="section-header">
                     <h2>Newsletter</h2>
-                    <p>Subscribe to get updates on current news events.</p>
+                    <p>Subscribe to get updates on upcoming events.</p>
                 </div>
-
-                <form method="POST" action="#">
+        
+                <form method="POST" action="{{ route('subscribe') }}">
+                    @csrf
                     <div class="row justify-content-center">
                         <div class="col-lg-6 col-md-10 d-flex">
-                            <input type="text" class="form-control" placeholder="Enter your Email">
+                            <input type="text" class="form-control" name="email" placeholder="Enter your Email" required>
                             <button type="submit" class="ms-2">Subscribe</button>
                         </div>
                     </div>
                 </form>
-
             </div>
         </section><!-- End Subscribe Section -->
+        
 
         <!-- ======= Buy Ticket Section ======= -->
         <section id="buy-tickets" class="section-with-bg">
