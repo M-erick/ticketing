@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Event;
+use App\Mail\CustomMail;
+use Illuminate\Support\Facades\Mail;
 
 use App\Notifications\TicketPurchased;
 
@@ -35,16 +37,21 @@ class ReservationController extends Controller
     
        
     
+        $eventTitle = $request->input('event');
+        $userName = $request->input('user_name');
     
         $reservation = Reservation::create([
             'user_name' => $request->input('user_name'),
             'user_email' => $request->input('user_email'),
             'ticket_type' => $ticketType,
-            'event_title' => $request->input('event'),
+            'event_title' => $eventTitle,
         ]);
 
         // Trigger the notification
-         $reservation->notify(new TicketPurchased());
+
+        // $email = $user->email; // Use the user's email address
+
+    Mail::to( $userEmail)->send(new CustomMail($eventTitle, $userName, $ticketType));
 
             // You can redirect back to the current page with the message
             return redirect()->back()->with('success', 'Booking successful! Ticket Type: ' . $ticketType . ', Event Title: ' . $request->input('event'));
@@ -57,6 +64,17 @@ class ReservationController extends Controller
 
     return view('reservations.index',compact('reservations'));
 }
+
+   
+// public function sendEmail()
+// {
+//     $email = 'faithmuriuki105@gmail.com'; // Replace with the recipient's email address
+
+//     Mail::to($email)->send(new CustomMail());
+
+//     return 'Email sent successfully!';
+// }
+
 
 }
 
