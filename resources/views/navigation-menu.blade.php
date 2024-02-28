@@ -18,13 +18,23 @@
                 </div>
 
                 <!-- Navigation Links  update the navbar here -->
+                @admin
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @admin
+                 
     <x-nav-link href="{{ route('events.create') }}" :active="request()->routeIs('events.create')">
         {{ __('Create Event') }}
     </x-nav-link>
-@endadmin
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('reservations') }}">
+                        {{ __('Reservations') }}
+                    </x-nav-link>
+                </div>
+                @endadmin
+
+
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('events.index') }}">
                         {{ __('Events') }}
