@@ -19,6 +19,7 @@ class ReservationController extends Controller
             'ticket-type' => 'required|string',
             'event' => 'required|string',
         ]);
+        
 
         $userEmail = $request->input('user_email');
         $userReservationTicketCount = Reservation::where('user_email',$userEmail)->count();
@@ -43,12 +44,20 @@ class ReservationController extends Controller
         ]);
 
         // Trigger the notification
-    $reservation->notify(new TicketPurchased());
+         $reservation->notify(new TicketPurchased());
 
             // You can redirect back to the current page with the message
             return redirect()->back()->with('success', 'Booking successful! Ticket Type: ' . $ticketType . ', Event Title: ' . $request->input('event'));
      
     }
+    public function showUserReservations()
+{
+    // Retrieve the authenticated user's reservations
+    $reservations = Reservation::all();
+
+    return view('reservations.index',compact('reservations'));
+}
+
 }
 
 

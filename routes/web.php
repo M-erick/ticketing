@@ -59,6 +59,7 @@ Route::post('/subscribe', [EventController::class, 'subscribe'])->name('subscrib
 
 //Reservation Routes
 Route::post('/reservations', [ReservationController::class ,'store'])->name('reservations.store');
+Route::get('/user/reservations', [ReservationController::class ,'showUserReservations'])->name('reservations');
 
 
 
