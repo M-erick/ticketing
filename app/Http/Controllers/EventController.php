@@ -7,6 +7,7 @@ use App\Models\Event;
 use Carbon\Carbon;
 use App\Models\Subscriber;
 
+
 class EventController extends Controller
 {
 
@@ -101,7 +102,7 @@ class EventController extends Controller
          if (!$request->user() || !$request->user()->hasRole('admin')) {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -147,6 +148,5 @@ class EventController extends Controller
     return redirect()->back()->with('success', 'Subscription successful!');
 }
 
-   
 
 }
