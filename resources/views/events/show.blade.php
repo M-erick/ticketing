@@ -183,11 +183,11 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="user_name"
-                                        placeholder=" Name" required>
+                                        placeholder=" Name"  value="{{ Auth::user()->name }}" readonly required>
                                 </div>
                                 <div class="form-group mt-3">
                                     <input type="text" class="form-control" name="user_email"
-                                        placeholder=" Email" required>
+                                        placeholder=" Email" value="{{ Auth::user()->email }}" readonly  required>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="event">Select Event:</label>
