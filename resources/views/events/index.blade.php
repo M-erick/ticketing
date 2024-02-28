@@ -39,18 +39,30 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
              {{-- success message --}}
-    @if (session('success'))
-    <div class="alert alert-success" id="success-alert">
-        {{ session('success') }}
-
-    </div>
-    <script>
-        // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
-        setTimeout(function() {
-            document.getElementById('success-alert').style.display = 'none';
-        }, 5000);
-    </script>
-@endif
+             @if (session('success'))
+             <div class="alert alert-success" id="success-alert">
+                 {{ session('success') }}
+             </div>
+             <script>
+                 // Add a timeout to hide the success message after 5 seconds (5000 milliseconds)
+                 setTimeout(function() {
+                     document.getElementById('success-alert').style.display = 'none';
+                 }, 5000);
+             </script>
+         @endif
+         
+         @if (session('error'))
+             <div class="alert alert-danger" id="error-alert">
+                 {{ session('error') }}
+             </div>
+             <script>
+                 // Add a timeout to hide the error message after 5 seconds (5000 milliseconds)
+                 setTimeout(function() {
+                     document.getElementById('error-alert').style.display = 'none';
+                 }, 5000);
+             </script>
+         @endif
+         
             <div  class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 @foreach($events_paginate as $event)
