@@ -112,10 +112,10 @@
                 <div class="row">
                     <!-- Standard Access Ticket -->
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card mb-5 mb-lg-0">
+                        <div class="mb-5 card mb-lg-0">
                             <div class="card-body">
-                                <h5 class="card-title  text-uppercase text-center" style="font-weight:">Regular</h5>
-                                <h6 class="card-price text-center">${{ $event->regular_ticket_price }}</h6>
+                                <h5 class="text-center card-title text-uppercase" style="font-weight:">Regular</h5>
+                                <h6 class="text-center card-price">${{ $event->regular_ticket_price }}</h6>
                                 <hr>
                                 <ul class="fa-ul">
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
@@ -146,8 +146,8 @@
                     <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title  text-uppercase text-center " style="font-weight: bold">VIP</h5>
-                                <h6 class="card-price text-center">${{ $event->vip_ticket_price }}</h6>
+                                <h5 class="text-center card-title text-uppercase " style="font-weight: bold">VIP</h5>
+                                <h6 class="text-center card-price">${{ $event->vip_ticket_price }}</h6>
                                 <hr>
                                 <ul class="fa-ul">
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>VIP Seating</li>
@@ -183,13 +183,13 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="user_name"
-                                        placeholder=" Name"  value="{{ Auth::user()->name }}" readonly required>
+                                        placeholder=" Name"  value=""  required>
                                 </div>
-                                <div class="form-group mt-3">
+                                <div class="mt-3 form-group">
                                     <input type="text" class="form-control" name="user_email"
-                                        placeholder=" Email" value="{{ Auth::user()->email }}" readonly  required>
+                                        placeholder=" Email" value=""   required>
                                 </div>
-                                <div class="form-group mt-3">
+                                <div class="mt-3 form-group">
                                     <label for="event">Select Event:</label>
                                     <select id="event" name="event" class="form-select" required>
                                         <option value="">-- Select Event --</option>
@@ -198,7 +198,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group mt-3">
+                                <div class="mt-3 form-group">
                                     <label for="ticket-type">Select Ticket Type:</label>
                                     <select id="ticket-type" name="ticket-type" class="form-select" required>
                                         <option value="">-- Select Your Ticket Type --</option>
@@ -206,7 +206,7 @@
                                         <option value="vip-access">VIP</option>
                                     </select>
                                 </div>
-                                <div class="text-center mt-3">
+                                <div class="mt-3 text-center">
                                     <button type="submit" class="btn">Buy Now</button>
                                 </div>
                             </form>
