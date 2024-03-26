@@ -34,29 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
-//  creating a new event
-Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-
-// Store a newly created event in the database
-Route::post('/events', [EventController::class, 'store'])->name('events.store');
-
-// Show the details of a specific event
-Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
-
-// Show the form for editing an existing event
-Route::get('/events/{id}/edit', [EventController::class, 'edit'])->name('events.edit');
-
-// Update the specified event in the database
-Route::put('/events/{id}', [EventController::class, 'update'])->name('events.update');
-
-// Remove the specified event from the database
-Route::delete('/events/{id}', [EventController::class, 'destroy'])->name('events.destroy');
-
+Route::resource('/events',EventController::class);
 // subscriber
 Route::post('/subscribe', [EventController::class, 'subscribe'])->name('subscribe');
-
+Route::get('/media',[EventController::class,'media'])->name('events.media');
 //Reservation Routes
 Route::post('/reservations', [ReservationController::class ,'store'])->name('reservations.store');
 Route::get('/user/reservations', [ReservationController::class ,'showUserReservations'])->name('reservations');
