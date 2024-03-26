@@ -275,7 +275,13 @@
                         <div class="card mb-5 mb-lg-0">
                             <div class="card-body">
                                 <h5 class="card-title  text-uppercase text-center" style="font-weight:">Regular</h5>
+                                @if ($latestEvent)
                                 <h6 class="card-price text-center">${{ $latestEvent->regular_ticket_price }}</h6>
+                                @else
+                                <h6 class="card-price text-center">Regula Ticket Price</h6>
+
+                                    
+                                @endif
                                 <hr>
                                 <ul class="fa-ul">
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
@@ -307,7 +313,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title  text-uppercase text-center " style="font-weight: bold">VIP</h5>
+                                @if ($latestEvent)
                                 <h6 class="card-price text-center">${{ $latestEvent->vip_ticket_price }}</h6>
+                                @else
+                                <h6 class="card-price text-center">Vip Ticket Price</h6>
+
+                                    
+                                @endif
                                 <hr>
                                 <ul class="fa-ul">
                                     <li><span class="fa-li"><i class="fa fa-check"></i></span>VIP Seating</li>
