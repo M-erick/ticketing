@@ -148,5 +148,8 @@ class EventController extends Controller
     return redirect()->back()->with('success', 'Subscription successful!');
 }
 
+public function media(){
+    return view('events.media');
+}
 
 }
